@@ -29,7 +29,7 @@ namespace WebApplication1.Controllers
 
             var mail = new IdentityMessage
             {
-                //Subject = contactForm.Subject,
+                Subject = contactForm.Subject,
                 Destination = ConfigurationManager.AppSettings["ContactMeEmail"],
                 Body = "You have recieved a new contact form submission from " + contactForm.contactName +
                 "( " + contactForm.FromEmail + " ) with the following contents<br/>" + contactForm.Message

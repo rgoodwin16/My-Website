@@ -10,8 +10,8 @@ namespace WebApplication1.Models
     {
         [Required]
         public string contactName { get; set; }
-        
-       
+        [Required]
+        public string Subject { get; set; }
         [Required]
         public string Message { get; set; }
         [Required]
