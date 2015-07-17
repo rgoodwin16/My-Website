@@ -6,6 +6,8 @@ using System.Web.Mvc;
 
 namespace WebApplication1.Controllers
 {
+    [Authorize]
+    [RequireHttps]
     public class ExercisesController : Controller
     {
         // GET: Exercises

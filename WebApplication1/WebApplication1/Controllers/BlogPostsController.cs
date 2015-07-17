@@ -11,6 +11,8 @@ using WebApplication1.Models;
 
 namespace WebApplication1.Controllers
 {
+    [Authorize]
+    [RequireHttps]
     public class BlogPostsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
@@ -37,6 +39,7 @@ namespace WebApplication1.Controllers
         }
 
         // GET: BlogPosts/Create
+        [Authorize(Roles = "Admin")]
         public ActionResult Create()
         {
             return View();
@@ -85,6 +88,7 @@ namespace WebApplication1.Controllers
         }
 
         // GET: BlogPosts/Edit/5
+        [Authorize(Roles = "Moderator,Admin")]
         public ActionResult Edit(int? id)
         {
             if (id == null)

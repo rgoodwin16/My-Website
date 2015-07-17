@@ -9,6 +9,8 @@ using WebApplication1.Models;
 
 namespace WebApplication1.Controllers
 {
+    [Authorize]
+    [RequireHttps]
     public class ContactController : Controller
     {
         // GET: Contact
