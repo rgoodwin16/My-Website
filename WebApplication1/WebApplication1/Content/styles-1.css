@@ -338,6 +338,7 @@ hr{
 	background-size: 100%;
 	background-size: cover;
 	overflow: hidden;
+    z-index: 2;
 }
 
 #home .container{
@@ -378,6 +379,7 @@ hr{
 	left:50%;
 	width:900px;
 	margin-left:-450px;
+    z-index: -1;
 	
 }
 
