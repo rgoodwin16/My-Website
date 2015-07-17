@@ -142,7 +142,7 @@ hr{
 }
 
 .light-typo *{
-	color: #fff;
+	color: #555;
 }
 
 /*---------------
@@ -1208,8 +1208,8 @@ hr{
 	height:100%;
 	top:0;
 	left:0;
-	background: #07141f;
-	opacity:.9;
+	
+	opacity:.8;
 	z-index: 1;
 }
 
@@ -1238,8 +1238,8 @@ hr{
 	padding: 0;
 	font-size: 38px;
 	font-weight: 400;
-	color:#00CCCB;
-	border-bottom: 2px solid;
+	color:#555;
+	
 }
 
 #contact .mail-styled:hover,
@@ -1247,6 +1247,7 @@ hr{
 #contact .mail-styled:active{
 	border-bottom-color: transparent;
 	text-decoration: none;
+
 }
 
 #contact .social-links{
@@ -1273,7 +1274,7 @@ hr{
 	font-size:18px;
 	line-height:24px;
 	font-weight:400;
-	color:#88949C;
+	color:#555;
 	z-index: -1;
 	-webkit-transition: all .25s ease-out;
 	transition: all .25s ease-out;
@@ -1348,9 +1349,7 @@ hr{
 #contactForm .btn:focus{
 	float:right;
 	margin-top: -30px;
-	padding: 0;
 	font-size: 21px;
-	color:#fff;
 	background: none !important;
 	-webkit-transition: all .15s ease-out;
 	transition: all .15s ease-out;
@@ -2051,10 +2050,9 @@ hr{
 	opacity:.8;
 }
 
-   .text-box multi-line{
-       width: 400px;
-       height: 200px;
-   }
+
+
+   
 
 }
    

@@ -18,7 +18,7 @@ namespace WebApplication1.Controllers
         // GET: BlogPosts
         public ActionResult Index()
         {
-            return View(db.Posts.ToList());
+            return View(db.Posts.OrderByDescending(p => p.Created));
         }
 
         // GET: BlogPosts/Details/5
