@@ -48,8 +48,11 @@
                     <hr>
 
                     <!-- Post Content -->
+                    <div class="ellipsis">
 
-                    <p>@Html.Raw(item.Body)</p>
+                        <p>@Html.Raw(item.Body)</p>
+
+                   </div>
 
                     <hr />
                     
@@ -97,5 +100,16 @@
        
 </section>
         
+@section scripts {
+    <script>
+        $(document).ready(function () {
+            $(".ellipsis").dotdotdot({
+                ellipsis: '...',
+                height: 25,
 
+            })
+        });
+    </script>
+
+}
 
