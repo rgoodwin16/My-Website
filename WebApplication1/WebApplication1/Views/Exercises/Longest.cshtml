@@ -1,0 +1,75 @@
+﻿@{
+    ViewBag.Title = "Longest";
+}
+
+<div class="container">
+
+    <div class="row">
+        <div id="longest-word" class="col-xs-12 col-lg-6">
+            <h2>Longest Word</h2>
+            <p>This program is designed to search through a text file and display the longest word within it.</p>
+            <input type="file" id="fileInput" /><br />
+            <input type="button" value="Search" onclick="longestReadText()" class="btn btn-info" />
+
+            <div class="results">
+                <h4 id="resultLongest"></h4>
+            </div>
+        </div><!-- end longest-word -->
+
+        <div class="col-xs-12 col-lg-6">
+
+            <pre class="brush: js">
+            
+                //Longest Word 
+                
+                (function () {
+   
+                    //============= Longest Word Reader =====================================//
+                    window.longestReadText = function () {
+                        var reader = new FileReader();
+        
+                        var output = "";
+                        var filePath = document.getElementById('fileInput');
+                        if (filePath.files && filePath.files[0]) {
+                            reader.onload = function (e) {
+                                output = e.target.result;
+                                var longest = longestWordChecker(output);
+                                displayLongestWord(longest)
+                            }; //end onload()
+                            reader.readAsText(filePath.files[0]);
+                        } //end if html5 filelist support
+                    }
+                    //============= Longest Word Checker & Display =========================//
+                    function longestWordChecker(txt) {
+                        var str = txt.split(new RegExp(/[\s,()\n\r\t]+/));
+        
+                        console.log(str);
+                        var longest = ' ';
+                        for (var i = 0; i < str.length; i++) {
+            
+                            var current = str[i];
+                            if (current.length > longest.length)
+                                longest = current;
+                        }
+                        return longest;
+                    }
+    
+                    function displayLongestWord(word) {
+                        var longestResult = document.getElementById('resultLongest');
+                        longestResult.innerHTML = "The longest word in this file is: " + "<strong>" + word + "</strong>";
+                    }
+                })();
+                
+            </pre><!-- End My Code Display -->
+
+        </div><!-- End Syntax Highlighter -->
+
+    </div><!-- End Row -->
+
+</div><!-- End Container -->
+
+
+<script type="text/javascript">
+    SyntaxHighlighter.highlight();
+</script>
+<script src="~/Scripts/JS Examples/longest.js"></script>

@@ -1,0 +1,50 @@
+﻿@{
+    ViewBag.Title = "Palindrome";
+}
+
+<div class="container">
+
+    <div class="row">
+
+        <div id="palindrome" class="col-xs-12 col-lg-6">
+            <h2>Palindromes</h2>
+            <p>This program is designed to see if what is given is a Palindrome.</p>
+            <p>Please enter some text.</p>
+            <input type="text" id="userText" class="form-control" /><br />
+            <input type="button" value="Is This a Palindrome?" onclick="palindrome()" class="btn btn-info" />
+
+            <div class="results">
+                <h4 id="resultPal"></h4>
+            </div>
+        </div><!-- end palindrome -->
+
+        <div class="col-xs-12 col-lg-6">
+
+            <pre class="brush: js">
+
+                //Palindromes
+
+                function palindrome() {
+                    var text = document.getElementById('userText').value;
+                    var inverse = text.split("").reverse().join("");
+                    if (inverse == text) {
+                        var palResult = text + " is a Palindrome.";
+                    } else {
+                        var palResult = text + " is NOT a Palindrome.";
+                    }
+                    var palHtml = document.getElementById('resultPal');
+                    palHtml.innerHTML = palResult;
+                }                
+
+            </pre><!-- End My Code Display -->
+
+        </div><!-- End Syntax Highlighter -->
+
+    </div><!-- End Row -->
+
+</div><!-- End Container -->
+
+<script type="text/javascript">
+    SyntaxHighlighter.highlight();
+</script>
+<script src="~/Scripts/JS Examples/palindrome.js"></script>

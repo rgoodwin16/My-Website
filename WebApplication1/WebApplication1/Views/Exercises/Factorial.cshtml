@@ -1,0 +1,65 @@
+﻿@{
+    ViewBag.Title = "Factorial";
+}
+
+
+<div class="container">
+    
+    <div class="row">
+       
+        <div id="factorials" class="col-xs-12 col-lg-4">
+            <h2>Factorials</h2>
+            <p>What is a <a href="http://en.wikipedia.org/wiki/Factorial">factorial</a> ?</p>
+            <p>In mathematics, the factorial of a non-negative integer n, denoted by n!, is the product of all positive integers less than or equal to n. For example,</p>
+            <p>5! = 5 x 4 x 3 x 2 x 1 = 120.</p>
+            <p>This program is designed to display the Factorial of a given number.</p>
+            <p>Please enter a number.</p>
+            <input type="text" id="factNum" class="form-control" /><br />
+            <input type="button" value="Calculate" onclick="factorial()" class="btn btn-info" />
+
+        </div><!-- end factorials -->
+
+        <div class="col-xs-12 col-lg-2">
+            <h3 id="resultFact"></h3>
+        </div><!-- End Results -->
+
+
+        <div class="col-xs-12 col-lg-6">
+            
+            <pre class=" brush: js">
+
+                //Factorials
+
+                    function fact(num) {
+                        if (num < 0)
+                            return 'Undefined';
+                        var fact = 1;
+                        for (var i = num; i > 1; i--)
+                            fact *= i;
+                        return fact;
+                    }
+                    function factorial() {
+                        var factNum = parseFloat(document.getElementById('factNum').value);
+                        var factHtml = document.getElementById('resultFact');
+                        if (isNaN(factNum)) {
+                            factHtml.innerHTML = "Please enter a real number.";
+                        } else {
+                            var factResult = fact(factNum);
+                            factHtml.innerHTML = "The Factorial of " + factNum + " is:  " + factResult;
+                        }
+                    }
+
+            </pre><!--  End My Code Display -->
+
+        </div><!-- End Syntax Highlighter -->
+
+    </div><!-- End Row -->
+    
+
+</div>
+
+<script type="text/javascript">
+    SyntaxHighlighter.highlight();
+</script>
+
+<script src="~/Scripts/JS Examples/factorial.js"></script>

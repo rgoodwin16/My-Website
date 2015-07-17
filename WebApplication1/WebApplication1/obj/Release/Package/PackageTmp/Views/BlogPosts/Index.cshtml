@@ -1,0 +1,94 @@
+﻿@model IEnumerable<Blog.Models.BlogPost>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+
+
+
+<!-- ==============================================
+     BLOG
+=============================================== -->
+
+<section id="blog" class="big-padding">
+
+    <div class="container">
+
+        <h2>Index</h2>
+
+        <p>
+            @Html.ActionLink("Create New", "Create")
+        </p>
+        
+        <div class="row">
+
+            <!-- Blog Post Content Column -->
+
+            <div class="col-lg-8">
+
+                <!-- Blog Post -->
+                
+                @foreach (var item in Model)
+                {
+
+                    <!-- Title -->
+                    <h1>@Html.DisplayFor(modelItem => item.Title)</h1>
+
+                    <!-- Author -->
+                    <p class="lead">
+                        by <a href="#">Ray Goodwin</a>
+                    </p>
+
+                    <hr>
+
+                    <!-- Date/Time -->
+                    <p><span class="glyphicon glyphicon-time"></span> Posted on @Html.DisplayFor(modelItem => item.Created)</p>
+
+                    <hr>
+
+                    <!-- Post Content -->
+
+                    <p>@Html.Raw(item.Body)</p>
+
+                    <hr />
+                    
+                    <p><span class="glyphicon glyphicon-time"></span> Updated on @Html.DisplayFor(modelItem => item.Updated)</p>
+                    
+                    <p>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                        @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                    </p>
+
+                }
+           
+
+
+            </div><!-- End Blog Post Column -->
+
+            <!-- Blog Sidebar Widgets Column -->
+
+            <div class="col-lg-4">
+
+                <!-- Blog Search Well -->
+
+                <div class="well">
+
+                </div><!-- End Blog Search Well -->
+                <!-- Blog Categories Well -->
+
+                <div class="well">
+
+                </div><!-- End Blog Categories Well -->
+
+            </div><!-- End Sidebar Widget Column -->
+
+        </div><!-- End Row -->
+
+        </div>
+       
+</section>
+        
+
+

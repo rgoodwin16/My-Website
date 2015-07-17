@@ -1,0 +1,78 @@
+﻿@{
+    ViewBag.Title = "Happy";
+}
+
+<div class="container">
+
+    <div class="row">
+
+        <div id="happy-numbers" class="col-xs-12 col-lg-4">
+            <h2>Happy Numbers</h2>
+            <p>What is a <a href="http://en.wikipedia.org/wiki/Happy_number">happy number</a> ?</p>
+            <p>A happy number is a number defined by the following process: Starting with any positive integer, replace the number by the sum of the squares of its digits, and repeat the process until the number equals 1 (where it will stay), or it loops endlessly in a cycle which does not include 1. Those numbers for which this process ends in 1 are happy numbers, while those that do not end in 1 are unhappy numbers (or sad numbers).</p>
+            <p>For example, 19 is happy, as the associated sequence is:</p>
+            <p>1<sup>2</sup> + 9<sup>2</sup> = 82</p>
+            <p>8<sup>2</sup> + 2<sup>2</sup> = 68</p>
+            <p>6<sup>2</sup> + 8<sup>2</sup> = 100</p>
+            <p>1<sup>2</sup> + 0<sup>2</sup> + 0<sup>2</sup> = 1.</p>
+            <p>This program is designed to calculate and then display the first five Happy Numbers.</p>
+            <input type="button" value="Calculate" onclick="disHappy(1)" class="btn btn-info" />
+
+            
+
+        </div><!-- end happy-numbers -->
+        
+        <div class="col-xs-12 col-lg-2">
+            <h4 id="resultHappy"></h4>
+        </div><!-- End Results -->
+
+        <div class="col-xs-12 col-lg-6">
+
+            <pre class="brush: js">
+
+                  //Happy Numbers
+
+                    function happyChecker(n) {
+                        var arr = [];
+                        var newNum = 0;
+                        //Ok split the number into a string then into an array
+                        var num = n.toString().split("");
+                        for (var i = 0; i < num.length; i++) {
+                            arr[i] = parseInt(num[i], 10);
+                        }
+                        //Ok square the numbers and add them to newNum
+                        for (var i = 0; i < arr.length; i++) {
+                            newNum += Math.pow(arr[i], 2);
+                        }
+                        //And here is a quick check to stop from hitting an endless loop
+                        if (newNum === 58 || newNum === 4 || newNum === 37) {
+                            return false;
+                        }
+                        if (newNum === 1) {
+                            return true;
+                        } else {
+                            return happyChecker(newNum);
+                        }
+                    }
+                    function disHappy(num) {
+                        var happy = document.getElementById('resultHappy');
+                        for (j = num; j < 20; j++) {
+                            if (happyChecker(j)) {
+                                happy.innerHTML += j + " is a Happy Number." + "<br />";
+                            }
+                        }
+                    }
+
+            </pre><!--  End My Code Display -->
+
+        </div><!-- End Syntax Highlighter -->
+
+    </div><!--  End Row -->
+
+</div><!-- End Container -->
+
+<script type="text/javascript">
+    SyntaxHighlighter.highlight();
+</script>
+
+<script src="~/Scripts/JS Examples/happy.js"></script>

@@ -1,0 +1,91 @@
+﻿
+
+@{
+    ViewBag.Title = "Max";
+}
+
+
+<div class="container">
+    <div class="row">
+
+        <div id="max-sum-multiply" class="col-xs-12 col-lg-4">
+            <h2>Max of Five | Sum of Five | Multiply Five</h2>
+            <p>This program is designed to look a group of numbers, display the largest of the group, give the sum of the group, and multiply the group.</p>
+            <p>Please enter a different number into each box.</p>
+            <input type="text" id="num1" class="form-control" /><br />
+            <input type="text" id="num2" class="form-control" /><br />
+            <input type="text" id="num3" class="form-control" /><br />
+            <input type="text" id="num4" class="form-control" /><br />
+            <input type="text" id="num5" class="form-control" /><br />
+            <input type="button" value="Largest Number" onclick="maxOfFive()" class="btn btn-info .btn-large" />
+            <input type="button" value="Sum" onclick="sumOfFive()" class="btn btn-info" />
+            <input type="button" value="Multiply" onclick="multiplyFive()" class="btn btn-info" />
+
+
+        </div><!-- End max-sum-product -->
+           
+         <div class="col-xs-12 col-lg-2">
+            <h3 id="resultMax"></h3>
+            <h3 id="resultSum"></h3>
+            <h3 id="resultMultiply"></h3>
+        </div><!-- End Results -->
+
+        <div class="col-xs-12 col-lg-6">
+
+            <pre class="brush: js">
+              
+              //Max Of Five | Sum of Five | Product of Five
+                function maxOfFive() {
+                    var num1 = document.getElementById('num1').value;
+                    var num2 = document.getElementById('num2').value;
+                    var num3 = document.getElementById('num3').value;
+                    var num4 = document.getElementById('num4').value;
+                    var num5 = document.getElementById('num5').value;
+                    var max = Math.max(num1, num2, num3, num4, num5);
+                    var resultMax = document.getElementById('resultMax');
+                    resultMax.innerHTML = "The largest number is: " + max;
+                }
+                function sum(previousValue, currentValue) {
+                    return previousValue + Math.round(currentValue);
+                }
+                function multiply(previousValue, currentValue) {
+                    return previousValue * Math.round(currentValue);
+                }
+                function sumOfFive() {
+                    var numbers = [
+                        document.getElementById('num1').value,
+                        document.getElementById('num2').value,
+                        document.getElementById('num3').value,
+                        document.getElementById('num4').value,
+                        document.getElementById('num5').value,
+                    ];
+                    var sumResult = numbers.reduce(sum, 0);
+                    var sumHtml = document.getElementById('resultSum');
+                    sumHtml.innerHTML = "The Sum of the numbers is: " + sumResult;
+                }
+                function multiplyFive() {
+                    var numbers = [
+                        document.getElementById('num1').value,
+                        document.getElementById('num2').value,
+                        document.getElementById('num3').value,
+                        document.getElementById('num4').value,
+                        document.getElementById('num5').value,
+                    ];
+                    var multiplyResult = numbers.reduce(multiply, 1);
+                    var multiplyHtml = document.getElementById('resultMultiply');
+                    multiplyHtml.innerHTML = "The Product of the numbers is: " + multiplyResult;
+                }
+            </pre><!--  End My Code Display -->
+
+        </div><!-- End Syntax Highlighter -->
+
+
+    </div><!-- End Row -->
+</div><!-- End Container -->
+
+<script type="text/javascript">
+    SyntaxHighlighter.highlight();
+</script>
+
+<script src="~/Scripts/JS Examples/max_sum_product.js"></script>
+

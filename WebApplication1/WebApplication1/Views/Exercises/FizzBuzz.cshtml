@@ -1,0 +1,51 @@
+﻿@{
+    ViewBag.Title = "FizzBuzz";
+}
+
+<div class="container">
+
+    <div class="row">
+        <div id="fizz-buzz" class="col-xs-12 col-lg-6">
+            <h2>FizzBuzz</h2>
+            <p>This program is designed to display all the numbers between 1 &amp; 100, with every number that is a multiple of 3 being replaced with the word "Fizz", every number that is a multiple of 5 being replaced with the word "Buzz", and finally any number that is a multiple of both 3 &amp; 5 being replaced with the word "FizzBuzz".</p>
+            <input type="button" value="Display Numbers" onclick="fizzBuzz()" class="btn btn-info" />
+
+            <div class="results">
+                <h4 id="resultFizz"></h4>
+            </div>
+        </div><!-- end fizz-buzz -->
+
+        <div class="col-xs-12 col-lg-6">
+
+            <pre class="brush: js">
+            
+                //FizzBuzz
+
+                function fizzBuzz() {
+                    var fizzHtml = document.getElementById('resultFizz');
+                    for (i = 1; i <= 100; i++) {
+                        if ((i % 3 == 0) && (i % 5 == 0)) {
+                            fizzHtml.innerHTML += "FizzBuzz" + " ";
+                        } else if ((i % 3 == 0)) {
+                            fizzHtml.innerHTML += "Fizz" + " ";
+                        } else if ((i % 5 == 0)) {
+                            fizzHtml.innerHTML += "Buzz" + " ";
+                        } else {
+                            fizzHtml.innerHTML += i + " ";
+                        }
+                    }
+                }                
+
+            </pre><!-- End My Code Display -->
+
+        </div><!-- End Syntax Highlighter -->
+
+    </div><!-- End Row -->
+
+</div><!-- End Container -->
+
+
+<script type="text/javascript">
+    SyntaxHighlighter.highlight();
+</script>
+<script src="~/Scripts/JS Examples/fizz.js"></script>

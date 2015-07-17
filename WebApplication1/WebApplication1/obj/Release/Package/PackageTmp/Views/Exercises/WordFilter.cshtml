@@ -1,0 +1,79 @@
+﻿@{
+    ViewBag.Title = "WordFilter";
+}
+
+<div class="container">
+
+    <div class="row">
+        <div id="word-filter" class="col-xs-12 col-lg-6">
+            <h2>Word Filter</h2>
+            <p>This program is designed to search through a text file, find every word that is longer than a given interger, and then display those words.</p>
+            <input type="file" id="wordFilterFileInput" /><br />
+            Enter word length: <br />
+            <input type="text" id="userNumberWordFilter" class="form-control"><br />
+            <input type="button" value="Search" onclick="wordFilterReadText()" class="btn btn-info" />
+
+            <div class="results">
+                <h4 id="filterResult"></h4>
+            </div>
+
+        </div><!-- end word-filter -->
+
+        <div class="col-xs-12 col-lg-6">
+
+            <pre class="brush: js">
+            
+                (function () {
+    
+                //============  Word Filter Reader =====================================//
+                    window.wordFilterReadText = function () {
+                        var reader = new FileReader();
+                        var output = "";
+                        var filePath = document.getElementById('wordFilterFileInput');
+                        if (filePath.files && filePath.files[0]) {
+                            reader.onload = function (e) {
+                                output = e.target.result;
+                                var wordFilter = wordFilterChecker(output);
+                                displayWordFilter(wordFilter)
+                            }; //end onload()
+                            reader.readAsText(filePath.files[0]);
+                        } //end if html5 filelist support
+                    }
+                    //============== Word Filter Checker & Display =======================//
+                    function wordFilterChecker(txt) {
+                        var userNumber = parseFloat(document.getElementById('userNumberWordFilter').value);
+                        var textArray = txt.split(new RegExp(/[\s,()\n\r\t]+/));
+                        var wordFilter = '';
+                        var selectedWord = '';
+                        var printedWords = {};
+                        for (i = 0; i < textArray.length; i++) {
+                            selectedWord = textArray[i].replace(/[^\w]/gi, ' ').toLowerCase();
+                            if (selectedWord.length > userNumber) {
+                                if (printedWords[selectedWord] == null) {
+                                    wordFilter += selectedWord + "<br />";
+                                    printedWords[selectedWord] = true;
+                                }
+                            }
+                        }
+                        return wordFilter;
+                    }
+                    function displayWordFilter(word) {
+                        var filterResult = document.getElementById('filterResult');
+                        //filterResult.innerHTML += word + "<br />";
+                        filterResult.innerHTML = word;
+                    }
+                })();
+                
+            </pre><!-- End My Code Display -->
+
+        </div><!-- End Syntax Highlighter -->
+
+    </div><!-- End Row -->
+
+</div><!-- End Container -->
+
+
+<script type="text/javascript">
+    SyntaxHighlighter.highlight();
+</script>
+<script src="~/Scripts/JS Examples/word_filter.js"></script>
