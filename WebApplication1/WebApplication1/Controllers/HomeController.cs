@@ -15,13 +15,7 @@ namespace WebApplication1.Controllers
             return View();
         }
 
-        public ActionResult Blog()
-        {
-            ViewBag.Message = "Your application description page.";
-
-            return View();
-        }
-
+        
         public ActionResult Profile()
         {
             ViewBag.Message = "Your application description page.";
@@ -36,11 +30,6 @@ namespace WebApplication1.Controllers
             return View();
         }
         
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
-        }
+        
     }
 }

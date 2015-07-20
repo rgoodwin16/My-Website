@@ -17,6 +17,13 @@ namespace WebApplication1.Controllers
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
+        //GET: BlogPosts/Admin
+        [Authorize(Roles = "Admin")]
+        public ActionResult Admin()
+        {
+            return View(db.Posts.OrderByDescending(p => p.Created));
+        }
+        
         // GET: BlogPosts
         public ActionResult Index()
         {

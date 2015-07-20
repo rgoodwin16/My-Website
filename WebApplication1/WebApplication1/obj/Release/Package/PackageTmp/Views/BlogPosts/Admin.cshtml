@@ -1,0 +1,107 @@
+﻿@model IEnumerable<Blog.Models.BlogPost>
+
+@{
+    ViewBag.Title = "Admin";
+}
+
+<!-- ==============================================
+     ADMIN PANEL
+=============================================== -->
+
+<section id="blog" class="big-padding">
+        
+    <div class="container">
+
+        <h2>Admin Panel</h2>
+        <p>
+            @if (HttpContext.Current.User.IsInRole("Admin"))
+            {
+                @Html.ActionLink("Create New", "Create")
+            }
+        </p>
+
+
+        @foreach (var item in Model)
+        {
+        <div class="row">
+            
+            
+        
+
+            <div class="col-lg-1"><!-- Begin Post Id -->
+
+                <h4>Post ID</h4>
+                <p>@Html.DisplayFor(modelItem => item.Id)</p>
+
+            </div><!-- End Post Id-->
+
+            <div class="col-lg-2"><!-- Begin Post Title -->
+
+                <h4>Post Title</h4>
+                <p>@Html.DisplayFor(modelItem => item.Title)</p>
+
+            </div><!-- End Post Title -->
+
+            <div class="col-lg-1"><!-- Begin Post Slug -->
+
+                <h4>Post Slug</h4>
+                <p>@Html.DisplayFor(modelItem => item.Slug)</p>
+
+            </div><!-- End Post Slug -->
+
+            
+            <div class="col-lg-4"><!-- Begin Post Body -->
+
+                <h4>Post Body</h4>
+                <div class="ellipsis">@Html.Raw(item.Body)</div>
+                <p>
+                   @Html.ActionLink("Edit", "Edit", new { id = item.Id }) | 
+                   @Html.ActionLink("Read More", "Details", new { id = item.Id }) |
+                   @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                </p>    
+
+            </div><!-- End Post Body -->
+
+            <div class="col-lg-2"><!-- Begin Post Created -->
+            
+                <h4>Created On</h4>
+                <p>@Html.DisplayFor(modelItem => item.Created)</p>
+
+            </div><!-- End Post Created -->
+
+
+            <div class="col-lg-2"><!-- Begin Post Updated -->
+            
+                <h4>Updated On</h4>
+                <p>@Html.DisplayFor(modelItem => item.Updated)</p>
+                
+
+                
+            </div><!-- End Post Updated -->
+
+        
+            
+        </div><!-- End Row -->
+       
+            <hr />
+        
+        }
+
+        @Html.ActionLink("Back to List", "Index")
+
+    </div><!-- end container -->
+
+</section><!-- End Section -->
+
+@section scripts {
+    <script>
+        $(document).ready(function () {
+            $(".ellipsis").dotdotdot({
+                ellipsis: '...',
+                height: 50,
+
+            })
+        });
+    </script>
+
+}
