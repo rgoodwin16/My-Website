@@ -65,7 +65,8 @@ namespace WebApplication1.Migrations
                     
             }
 
-            var coderId = codeManager.FindByEmail("moderator@coderfoundry.com").Id;
+            var 
+                coderId = codeManager.FindByEmail("moderator@coderfoundry.com").Id;
             codeManager.AddToRole(coderId, "Moderator");
 
         }
