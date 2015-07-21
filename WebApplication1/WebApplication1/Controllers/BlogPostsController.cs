@@ -12,7 +12,7 @@ using Microsoft.AspNet.Identity;
 
 namespace WebApplication1.Controllers
 {
-    [Authorize]
+    //[Authorize]
     [RequireHttps]
     public class BlogPostsController : Controller
     {
