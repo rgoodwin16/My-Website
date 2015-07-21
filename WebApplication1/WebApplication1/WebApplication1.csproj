@@ -168,6 +168,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BlogPostsController.cs" />
+    <Compile Include="Controllers\CommentController.cs" />
     <Compile Include="Controllers\ContactController.cs" />
     <Compile Include="Models\ContactMessage.cs" />
     <Compile Include="Controllers\ExercisesController.cs" />
@@ -549,12 +550,14 @@
     <Content Include="Views\Account\ConfirmationSent.cshtml" />
     <Content Include="Views\Contact\Index.cshtml" />
     <Content Include="Views\BlogPosts\Admin.cshtml" />
+    <Content Include="Views\Comment\Edit.cshtml" />
+    <Content Include="Views\Comment\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\BlogPost\" />
     <Folder Include="Views\Blog\" />
-    <Folder Include="Views\Comment\" />
+    <Folder Include="Views\Comments\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

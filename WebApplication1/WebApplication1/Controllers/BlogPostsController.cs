@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using Blog.Models;
 using WebApplication1.Models;
+using Microsoft.AspNet.Identity;
 
 namespace WebApplication1.Controllers
 {
@@ -162,5 +163,59 @@ namespace WebApplication1.Controllers
             }
             base.Dispose(disposing);
         }
+
+
+        
+        // POST: Create Comment
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult CreateComment([Bind(Include = "PostId,Body")]Comment comment)
+        {
+            if (ModelState.IsValid)
+            {
+                comment.Created = DateTimeOffset.Now;
+                comment.AuthorId = User.Identity.GetUserId();
+
+                db.Comments.Add(comment);
+                db.SaveChanges();
+
+                
+            }
+
+            return RedirectToAction("Details", new { id = comment.PostId });
+        }
+
+        //POST: Edit Comment
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Moderator,Admin")]
+        public ActionResult EditComment([Bind(Include = "Created,Id,PostId,Body")]Comment comment)
+        {
+            if (ModelState.IsValid)
+            {
+                comment.Updated = DateTimeOffset.Now;
+                db.Entry(comment).State = EntityState.Modified;
+                db.SaveChanges();
+
+                return RedirectToAction("Details", new { id = comment.PostId});
+
+            }
+
+            return View(comment);
+        }
+
+        //POST: Delete Comment
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Moderator, Admin")]
+        public ActionResult DeleteComment(int id)
+        {
+            Comment comment = db.Comments.Find(id);
+            db.Comments.Remove(comment);
+            db.SaveChanges();
+            return RedirectToAction("Details", new { id = comment.PostId });
+        }
+
+        
     }
 }
