@@ -11,6 +11,7 @@ using WebApplication1.Models;
 using Microsoft.AspNet.Identity;
 using PagedList;
 using PagedList.Mvc;
+using System.IO;
 
 namespace WebApplication1.Controllers
 {
@@ -38,13 +39,14 @@ namespace WebApplication1.Controllers
         }
 
         // GET: BlogPosts/Details/5
-        public ActionResult Details(int? id)
+        // GET: Blog/{Slug}
+        public ActionResult Details(string slug)
         {
-            if (id == null)
+            if (string.IsNullOrWhiteSpace(slug))
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            BlogPost blogPost = db.Posts.Find(id);
+            BlogPost blogPost = db.Posts.FirstOrDefault(p=> p.Slug == slug);
             if (blogPost == null)
             {
                 return HttpNotFound();
@@ -64,10 +66,36 @@ namespace WebApplication1.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Created,Updated,Title,Slug,Body,MediaURL,Published")] BlogPost blogPost)
+        public ActionResult Create([Bind(Include = "Id,Created,Updated,Title,Slug,Body,MediaURL,Published")] BlogPost blogPost, HttpPostedFileBase image)
         {
+
+            if(image!=null && image.ContentLength > 0) 
+            {
+                //check the file name to make sure its an image
+                var ext = Path.GetExtension(image.FileName).ToLower();
+                if (ext != ".png" && ext != ".jpg" && ext != ".jpeg" && ext != ".gif" && ext != ".bmp")
+                {
+                    ModelState.AddModelError("image", "Invalid Format");
+                }
+                
+            }
+
             if (ModelState.IsValid)
             {
+
+                if (image != null)
+                {
+                    //relative path
+                    var filePath = "/Uploads/";
+                    //path on physical drive on server
+                    var absPath = Server.MapPath("~" + filePath);
+                    Directory.CreateDirectory(absPath);
+                    //media url for relative path
+                    blogPost.MediaURL = filePath + image.FileName;
+                    //save image
+                    image.SaveAs(Path.Combine(absPath,image.FileName));
+                }
+
 
                 var slug = StringUtilities.UrlFriendly(blogPost.Title);
 
@@ -177,6 +205,7 @@ namespace WebApplication1.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult CreateComment([Bind(Include = "PostId,Body")]Comment comment)
         {
+            var blogPost = db.Posts.Find(comment.PostId);
             if (ModelState.IsValid)
             {
                 comment.Created = DateTimeOffset.Now;
@@ -188,7 +217,7 @@ namespace WebApplication1.Controllers
                 
             }
 
-            return RedirectToAction("Details", new { id = comment.PostId });
+            return RedirectToAction("Details", new { slug  = blogPost.Slug });
         }
 
         //POST: BlogPosts/Comment/Edit/5
@@ -199,11 +228,12 @@ namespace WebApplication1.Controllers
         {
             if (ModelState.IsValid)
             {
+                var blogPost = db.Posts.Find(comment.PostId);
                 comment.Updated = DateTimeOffset.Now;
                 db.Entry(comment).State = EntityState.Modified;
                 db.SaveChanges();
 
-                return RedirectToAction("Details", new { id = comment.PostId});
+                return RedirectToAction("Details", new { slug = blogPost.Slug});
 
             }
 
@@ -217,9 +247,12 @@ namespace WebApplication1.Controllers
         public ActionResult DeleteComment(int id)
         {
             Comment comment = db.Comments.Find(id);
+            var blogPost = db.Posts.Find(comment.PostId);
+            
             db.Comments.Remove(comment);
             db.SaveChanges();
-            return RedirectToAction("Details", new { id = comment.PostId });
+
+            return RedirectToAction("Details", new { slug = blogPost.Slug });
         }
 
         

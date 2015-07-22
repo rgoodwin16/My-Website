@@ -15,7 +15,7 @@ namespace Blog.Models
         public int Id { get; set; }
         public int PostId { get; set; }
         public string AuthorId {get; set;}
-        [AllowHtml]
+        
         [Required]
         [DataType(DataType.MultilineText)]
         public string Body {get; set;}

@@ -5,9 +5,6 @@
 }
 
 
-
-
-
 <!-- ==============================================
      SINGLE POST
 =============================================== -->
@@ -45,13 +42,71 @@
 
                 <!-- Blog Comments -->
                 <!-- Comments Form -->
+                
+                @if (User.Identity.IsAuthenticated)
+                {
 
+                    <form id="contactForm" method="post" action="@Url.Action("CreateComment", "BlogPosts")">
+                        @Html.AntiForgeryToken()
+                        <h3>Leave a Comment</h3>
+                        <input type="hidden" name="PostId" value="@Model.Id" />
+                        <div class="form-group">
+                            <div>
+
+                                <textarea name="Body" class="form-control" rows="6"></textarea>
+                            </div>
+                        </div><!-- End Comment Box -->
+
+                        <input type="submit" value="Submit" class="btn btn-default" /><br />
+
+                    </form>
+                <!-- End Comment Form -->
+
+
+                }
+                else
+                {
+                    <h4>Please <a href="@Url.Action("Login","Account")">Login</a> to Post a Comment</h4>
+                }
+            
                 
 
-                <!-- Posted Comments -->
-                <!-- Comment -->
+                <hr />
 
-            </div><!-- End Post Content Column -->
+                <!-- Posted Comments -->
+                      
+
+                    @foreach (var item in Model.Comments.OrderByDescending(c => c.Created))
+                    {
+                        <div>
+                            <h4>@Html.DisplayFor(modelItem => item.Author.UserName)</h4>
+                            <p>@Html.DisplayFor(modelItem => item.Created)</p>
+
+                            <div class="well">
+                                <p>@Html.Raw( item.Body)</p>
+                            </div><!-- End Comment Body -->
+
+                            <br />
+
+                            @if (HttpContext.Current.User.IsInRole("Moderator") || (HttpContext.Current.User.IsInRole("Admin")))
+                            {
+                                <a href="@Url.Action("Edit", "Comment", new { id= item.Id})">Edit</a>
+                                <a href="@Url.Action("Delete", "Comment", new {id= item.Id})">Delete</a>
+                            }
+                            
+
+
+                            <br />
+
+                            <hr />
+
+                        </div>
+                    }
+
+                
+                    <!-- Comment -->
+
+                </div><!-- End Post Content Column -->
 
             <!-- Blog Sidebar Widgets Column -->
 
@@ -74,6 +129,10 @@
 
 
         </div><!-- End Row -->
+        
+        <br />
+        
+        <hr />
             
         <p>
            @Html.ActionLink("Back to List", "Index")

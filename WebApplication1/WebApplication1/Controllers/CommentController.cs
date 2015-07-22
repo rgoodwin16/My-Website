@@ -11,19 +11,19 @@ namespace WebApplication1.Controllers
     {
         private ApplicationDbContext db = new ApplicationDbContext();
         // GET: Comment
-
+        [Authorize]
         public ActionResult Index(int id)
         {
             var comment = db.Comments.Find(id);
             return View(comment);
         }
-        
+        [Authorize]
         public ActionResult Edit(int id)
         {
             var comment = db.Comments.Find(id);
             return View(comment);
         }
-
+        [Authorize]
         public ActionResult Delete(int id)
         {
             var comment = db.Comments.Find(id);
