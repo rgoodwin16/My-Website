@@ -112,3 +112,7 @@ C:\Users\nanye\Documents\GitHub\My-Website\WebApplication1\WebApplication1\bin\M
 C:\Users\nanye\Documents\GitHub\My-Website\WebApplication1\WebApplication1\obj\Debug\WebApplication1.csprojResolveAssemblyReference.cache
 C:\Users\nanye\Documents\GitHub\My-Website\WebApplication1\WebApplication1\obj\Debug\WebApplication1.dll
 C:\Users\nanye\Documents\GitHub\My-Website\WebApplication1\WebApplication1\obj\Debug\WebApplication1.pdb
+C:\Users\nanye\Documents\GitHub\My-Website\WebApplication1\WebApplication1\bin\PagedList.dll
+C:\Users\nanye\Documents\GitHub\My-Website\WebApplication1\WebApplication1\bin\PagedList.Mvc.dll
+C:\Users\nanye\Documents\GitHub\My-Website\WebApplication1\WebApplication1\bin\PagedList.xml
+C:\Users\nanye\Documents\GitHub\My-Website\WebApplication1\WebApplication1\bin\PagedList.Mvc.xml

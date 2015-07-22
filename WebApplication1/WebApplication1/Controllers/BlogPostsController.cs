@@ -9,6 +9,8 @@ using System.Web.Mvc;
 using Blog.Models;
 using WebApplication1.Models;
 using Microsoft.AspNet.Identity;
+using PagedList;
+using PagedList.Mvc;
 
 namespace WebApplication1.Controllers
 {
@@ -22,13 +24,17 @@ namespace WebApplication1.Controllers
         [Authorize(Roles = "Admin")]
         public ActionResult Admin()
         {
+            
             return View(db.Posts.OrderByDescending(p => p.Created));
         }
         
         // GET: BlogPosts
-        public ActionResult Index()
+        public ActionResult Index(int? page)
         {
-            return View(db.Posts.OrderByDescending(p => p.Created));
+            int pageSize = 3;
+            int pageNumber = (page ?? 1);
+
+            return View(db.Posts.OrderByDescending(p => p.Created).ToPagedList(pageNumber, pageSize));
         }
 
         // GET: BlogPosts/Details/5
@@ -166,7 +172,7 @@ namespace WebApplication1.Controllers
 
 
         
-        // POST: Create Comment
+        // POST: BlogPosts/Comment/Create/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult CreateComment([Bind(Include = "PostId,Body")]Comment comment)
@@ -185,11 +191,11 @@ namespace WebApplication1.Controllers
             return RedirectToAction("Details", new { id = comment.PostId });
         }
 
-        //POST: Edit Comment
+        //POST: BlogPosts/Comment/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Moderator,Admin")]
-        public ActionResult EditComment([Bind(Include = "Created,Id,PostId,Body")]Comment comment)
+        public ActionResult EditComment([Bind(Include = "AuthorId,Created,Id,PostId,Body")]Comment comment)
         {
             if (ModelState.IsValid)
             {
@@ -204,7 +210,7 @@ namespace WebApplication1.Controllers
             return View(comment);
         }
 
-        //POST: Delete Comment
+        //POST: BlogPosts/Comment/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Moderator, Admin")]

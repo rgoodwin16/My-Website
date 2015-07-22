@@ -1,4 +1,6 @@
-﻿@model IEnumerable<Blog.Models.BlogPost>
+﻿@using PagedList.Mvc;
+@using PagedList;
+@model IPagedList<Blog.Models.BlogPost>
 
 @{
     ViewBag.Title = "Index";
@@ -101,6 +103,9 @@
             </div><!-- End Sidebar Widget Column -->
 
         </div><!-- End Row -->
+
+        Page@(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+        @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
 
         </div>
        
