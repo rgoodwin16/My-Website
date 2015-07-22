@@ -20,11 +20,11 @@
 
                 <!-- Blog Post -->
                 <!-- Title -->
-                <h1>@Html.DisplayFor(model => model.Title)</h1>
+                <h2>@Html.DisplayFor(model => model.Title)</h2>
             
                 <!-- Author -->
-                <p class="lead">
-                    by <a href="#">Ray Goodwin</a>
+                <p>
+                    by Ray Goodwin
                 </p>
 
                 <hr>
@@ -87,7 +87,7 @@
 
                     @foreach (var item in Model.Comments.OrderByDescending(c => c.Created))
                     {
-                        <div>
+                        <div id="commnets">
                             <h4>@Html.DisplayFor(modelItem => item.Author.UserName)</h4>
                             <p>@Html.DisplayFor(modelItem => item.Created)</p>
 

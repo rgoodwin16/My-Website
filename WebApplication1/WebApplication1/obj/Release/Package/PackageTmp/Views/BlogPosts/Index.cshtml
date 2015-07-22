@@ -55,6 +55,15 @@
 
                     <hr>
 
+                    <!-- Post Image -->
+                    
+                    <div>
+                        @if (item.MediaURL != null)
+                        {
+                            <img class="img-responsive" src="@item.MediaURL" alt="" />
+                        }
+                    </div>
+                    
                     <!-- Post Content -->
                     <div class="ellipsis">
 

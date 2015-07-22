@@ -34,6 +34,15 @@
 
                 <hr>
 
+                <!-- Post Image -->
+
+                <div>
+                    @if (@Model.MediaURL != null)
+                    {
+                        <img class="img-responsive" src="@Model.MediaURL" alt="" />
+                    }
+                </div>
+            
                 <!-- Post Content -->
 
                 <p>@Html.Raw(Model.Body)</p>
