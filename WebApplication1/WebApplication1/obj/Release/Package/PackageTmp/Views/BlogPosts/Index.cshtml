@@ -17,7 +17,7 @@
 
     <div class="container">
 
-        <h2>Index</h2>
+        
 
         <p>
             
@@ -39,19 +39,29 @@
                 
                 @foreach (var item in Model)
                 {
-
+                    var str = "Comments";
                     <!-- Title -->
-                    <h1>@Html.DisplayFor(modelItem => item.Title)</h1>
+                    <h3><a href="@Url.Action("Details", new { item.Slug })">@Html.DisplayFor(modelItem => item.Title)</a></h3>
 
                     <!-- Author -->
-                    <p class="lead">
-                        by <a href="#">Ray Goodwin</a>
+                    <p>
+                        by Ray Goodwin
                     </p>
 
                     <hr>
 
                     <!-- Date/Time -->
-                    <p><span class="glyphicon glyphicon-time"></span> Posted on @Html.DisplayFor(modelItem => item.Created)</p>
+                    <p><span class="glyphicon glyphicon-time"></span> Posted on @Html.DisplayFor(modelItem => item.Created) | @Html.DisplayFor(modelItem => item.Comments.Count) 
+                
+                    @if ( item.Comments.Count == 1)
+                    {
+                         str = "Comment";
+
+                    }
+                    
+                    @str
+                    
+                    </p>
 
                     <hr>
 
@@ -75,8 +85,8 @@
                     
                     
                     <p>
-                         
-                      <button type="button" class="btn btn-default">@Html.ActionLink("Read More", "Details", new {item.Slug })</button>    
+                      <input type="button" class="btn btn-default" onclick="location.href='@Url.Action("Details", new {item.Slug })'" value="Read More"/>  
+                      
                          
                     </p>
 
