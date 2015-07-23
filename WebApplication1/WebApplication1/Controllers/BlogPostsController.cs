@@ -38,6 +38,7 @@ namespace WebApplication1.Controllers
             return View(db.Posts.OrderByDescending(p => p.Created).ToPagedList(pageNumber, pageSize));
         }
 
+        
         // GET: BlogPosts/Details/5
         // GET: Blog/{Slug}
         public ActionResult Details(string slug)
@@ -68,7 +69,7 @@ namespace WebApplication1.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,Created,Updated,Title,Slug,Body,MediaURL,Published")] BlogPost blogPost, HttpPostedFileBase image)
         {
-
+            //Check if the image selected by the user isn't empty
             if(image!=null && image.ContentLength > 0) 
             {
                 //check the file name to make sure its an image
@@ -98,25 +99,27 @@ namespace WebApplication1.Controllers
 
 
                 var slug = StringUtilities.UrlFriendly(blogPost.Title);
-
+                
+                //Make sure the Title Slug Box has some data in it
                 if (String.IsNullOrWhiteSpace(slug))
                 {
                     ModelState.AddModelError("Title", "Invalid title.");
                     return View(blogPost);
                 }
-
+                                
+                //Check the Database to see if the Title already exists
                 if (db.Posts.Any(p => p.Slug == slug))
                 {
                     ModelState.AddModelError("Title", "The title must be unique.");
                     return View(blogPost);
                 }
-
+                
                 else
                 {
                     blogPost.Created = DateTimeOffset.Now;
                     
                     blogPost.Slug = slug;
-
+                    
                     db.Posts.Add(blogPost);
                     db.SaveChanges();
                     return RedirectToAction("Index");
@@ -198,6 +201,9 @@ namespace WebApplication1.Controllers
             base.Dispose(disposing);
         }
 
+        // ==============================================
+           //COMMENTS - CREATE/EDIT/DELETE
+        // =============================================== 
 
         
         // POST: BlogPosts/Comment/Create/5

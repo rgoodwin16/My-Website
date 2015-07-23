@@ -11,6 +11,7 @@
         public BlogPost()
         {
             this.Comments = new HashSet<Comment>();
+            
         }
 
         public int Id { get; set; }
@@ -25,6 +26,8 @@
         public string MediaURL { get; set; }
         public bool Published { get; set; }
 
+
+       
         public virtual ICollection<Comment> Comments { get; set; }
     }
 }

@@ -18,7 +18,7 @@ namespace WebApplication1.Migrations
 
         protected override void Seed(WebApplication1.Models.ApplicationDbContext context)
         {
-            
+            //Create Admin Role
             var roleManager = new RoleManager<IdentityRole>(
                 new RoleStore<IdentityRole>(context));
 
@@ -47,6 +47,7 @@ namespace WebApplication1.Migrations
             var userId = userManager.FindByEmail(adminEmail).Id;
             userManager.AddToRole(userId, "Admin");
 
+            //Create Moderator Role
             var coderRole = new RoleManager<IdentityRole>(
                 new RoleStore<IdentityRole>(context));
             if (!context.Roles.Any(r => r.Name == "Moderator"))
@@ -70,9 +71,10 @@ namespace WebApplication1.Migrations
                     
             }
 
-            var 
-                coderId = codeManager.FindByEmail(moderatorEmail).Id;
+            var coderId = codeManager.FindByEmail(moderatorEmail).Id;
             codeManager.AddToRole(coderId, "Moderator");
+
+            
 
         }
     }
