@@ -7,6 +7,7 @@ namespace WebApplication1.Migrations
     using System.Data.Entity.Migrations;
     using System.Linq;
     using WebApplication1.Models;
+    using System.Configuration;
 
     internal sealed class Configuration : DbMigrationsConfiguration<WebApplication1.Models.ApplicationDbContext>
     {
@@ -29,19 +30,21 @@ namespace WebApplication1.Migrations
             var userManager = new UserManager<ApplicationUser>(
                 new UserStore<ApplicationUser>(context));
 
-            if (!context.Users.Any(u => u.Email == "rgoodwin16@outlook.com"))
+            var adminEmail = ConfigurationManager.AppSettings["AdminEmail"];
+
+            if (!context.Users.Any(u => u.Email == adminEmail))
             {
                 userManager.Create(new ApplicationUser
                     {
-                        UserName = "rgoodwin16@outlook.com",
-                        Email = "rgoodwin16@outlook.com",
-                        FirstName = "Ray",
-                        LastName = "Goodwin",
-                        DisplayName = "Nanye East"
-                    }, "leeray1");
+                        UserName = ConfigurationManager.AppSettings["AdminEmail"],
+                        Email = ConfigurationManager.AppSettings["AdminEmail"],
+                        FirstName = ConfigurationManager.AppSettings["AdminFirstName"],
+                        LastName = ConfigurationManager.AppSettings["AdminLastName"],
+                        DisplayName = ConfigurationManager.AppSettings["AdminDisplayName"]
+                    }, ConfigurationManager.AppSettings["AdminPassword"]);
             }
 
-            var userId = userManager.FindByEmail("rgoodwin16@outlook.com").Id;
+            var userId = userManager.FindByEmail(adminEmail).Id;
             userManager.AddToRole(userId, "Admin");
 
             var coderRole = new RoleManager<IdentityRole>(
@@ -54,19 +57,21 @@ namespace WebApplication1.Migrations
             var codeManager = new UserManager<ApplicationUser>(
                 new UserStore<ApplicationUser>(context));
 
-            if (!context.Users.Any(u => u.Email == "moderator@coderfoundry.com"))
+            var moderatorEmail = ConfigurationManager.AppSettings["ModeratorEmail"];
+
+            if (!context.Users.Any(u => u.Email == moderatorEmail))
             {
                 codeManager.Create(new ApplicationUser
                     {
-                        UserName = "moderator@coderfoundry.com",
-                        Email = "moderator@coderfoundry.com",
-                        DisplayName = "Coderfoundry Moderator"
-                    }, "Password-1");
+                        UserName = ConfigurationManager.AppSettings["ModeratorEmail"],
+                        Email = ConfigurationManager.AppSettings["ModeratorEmail"],
+                        DisplayName = ConfigurationManager.AppSettings["ModeratorDisplayName"]
+                    }, ConfigurationManager.AppSettings["ModeratorPassword"]);
                     
             }
 
             var 
-                coderId = codeManager.FindByEmail("moderator@coderfoundry.com").Id;
+                coderId = codeManager.FindByEmail(moderatorEmail).Id;
             codeManager.AddToRole(coderId, "Moderator");
 
         }
