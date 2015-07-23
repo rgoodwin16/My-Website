@@ -104,7 +104,12 @@
                 <!-- Blog Search Well -->
 
                 <div class="well">
+                    <form method="post" action="@Url.Action("Search", "BlogPosts")">
 
+                        <input type="search" class="form-control" placeholder="Search"  name="search"/><button type="submit" class="btn btn-default" id="search-button" ><i class=" fa fa-search"></i></button>
+
+
+                    </form>
                 </div><!-- End Blog Search Well -->
                 <!-- Blog Categories Well -->
 

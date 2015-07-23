@@ -21,6 +21,19 @@ namespace WebApplication1.Controllers
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
+        // ==============================================
+            //SEARCH
+        // ============================================== 
+
+        public ActionResult Search()
+        {
+            return View();
+        }
+
+        // ==============================================
+            //INDEX - ADMIN INDEX PAGE
+        // ============================================== 
+
         //GET: BlogPosts/Admin
         [Authorize(Roles = "Admin")]
         public ActionResult Admin()
@@ -28,7 +41,11 @@ namespace WebApplication1.Controllers
             
             return View(db.Posts.OrderByDescending(p => p.Created));
         }
-        
+
+        // ==============================================
+            //INDEX - DEFAULT BLOG INDEX PAGE
+        // ============================================== 
+
         // GET: BlogPosts
         public ActionResult Index(int? page)
         {
@@ -38,6 +55,10 @@ namespace WebApplication1.Controllers
             return View(db.Posts.OrderByDescending(p => p.Created).ToPagedList(pageNumber, pageSize));
         }
 
+        
+        // ==============================================
+            //POSTS - CREATE/EDIT/DELETE
+        // ============================================== 
         
         // GET: BlogPosts/Details/5
         // GET: Blog/{Slug}
@@ -96,8 +117,7 @@ namespace WebApplication1.Controllers
                     //save image
                     image.SaveAs(Path.Combine(absPath,image.FileName));
                 }
-
-
+                
                 var slug = StringUtilities.UrlFriendly(blogPost.Title);
                 
                 //Make sure the Title Slug Box has some data in it
@@ -123,8 +143,7 @@ namespace WebApplication1.Controllers
                     db.Posts.Add(blogPost);
                     db.SaveChanges();
                     return RedirectToAction("Index");
-
-
+                    
                 }
 
             }
@@ -203,7 +222,7 @@ namespace WebApplication1.Controllers
 
         // ==============================================
            //COMMENTS - CREATE/EDIT/DELETE
-        // =============================================== 
+        // ============================================== 
 
         
         // POST: BlogPosts/Comment/Create/5
