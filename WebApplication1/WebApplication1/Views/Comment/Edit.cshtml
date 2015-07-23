@@ -21,7 +21,7 @@
             <input type="hidden" name="Created" value="@Model.Created" />
             <input type="hidden" name="AuthorId" value="@Model.AuthorId" />
 
-            <div class="form-group">
+            <div class="form-group" id="contactForm">
                     @Html.LabelFor(model => model.Body, htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
                         <h3>Edit Comment</h3>
@@ -39,7 +39,8 @@
                     
                     <br/>
                     
-                    <input type="submit" value="Save" class="btn btn-default" />
+                    <input type="button" class="btn btn-default" value="Back to Post" onclick="location.href='@Url.Action("Details", "BlogPosts", new { slug = Model.Post.Slug})'" />
+                    | <input type="submit" value="Save" class="btn btn-success" />
                 </div>
             </div>
         

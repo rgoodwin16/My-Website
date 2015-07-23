@@ -47,7 +47,8 @@
                 @Html.AntiForgeryToken()
                 <input type="hidden" name="id" value="@Model.Id" />
                 <div class="form-actions no-color">
-                    <input type="submit" value="Delete" class="btn btn-default" /> | <button type="button" class="btn btn-default">@Html.ActionLink("Back to Post", "Details", "BlogPosts", new { id = Model.PostId },"")</button>
+                    <input type="button" class="btn btn-default" value="Back to Post" onclick="location.href='@Url.Action("Details", "BlogPosts", new { slug = Model.Post.Slug})'"/>
+  | <input type="submit" value="Delete" class="btn btn-danger" />
 
                 </div>
             }

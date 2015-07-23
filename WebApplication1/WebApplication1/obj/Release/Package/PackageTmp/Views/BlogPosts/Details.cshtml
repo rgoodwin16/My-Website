@@ -55,21 +55,28 @@
                 @if (User.Identity.IsAuthenticated)
                 {
 
-                    <form id="contactForm" method="post" action="@Url.Action("CreateComment", "BlogPosts")">
-                        @Html.AntiForgeryToken()
-                        <h3>Leave a Comment</h3>
-                        <input type="hidden" name="PostId" value="@Model.Id" />
-                        <div class="form-group">
-                            <div>
+                    
+                    
 
-                                <textarea name="Body" class="form-control" rows="6"></textarea>
-                            </div>
-                        </div><!-- End Comment Box -->
+                        <form id="contactForm" method="post" action="@Url.Action("CreateComment", "BlogPosts")">
+                            @Html.AntiForgeryToken()
+                            <h3>Leave a Comment</h3>
+                            <input type="hidden" name="PostId" value="@Model.Id" />
+                            <div class="form-group">
+                                <div>
 
-                        <input type="submit" value="Submit" class="btn btn-default" /><br />
+                                    <textarea name="Body" class="form-control" rows="6"></textarea>
+                                </div>
+                            </div><!-- End Comment Box -->
 
-                    </form>
-                <!-- End Comment Form -->
+                            <input type="submit" value="Submit" class="btn btn-default" /><br />
+
+                        </form>
+                        <!-- End Comment Form -->
+
+                   
+                    
+                   
 
 
                 }
@@ -87,7 +94,8 @@
 
                     @foreach (var item in Model.Comments.OrderByDescending(c => c.Created))
                     {
-                        <div id="commnets">
+                        var str = "|";
+                        <div>
                             <h4>@Html.DisplayFor(modelItem => item.Author.UserName)</h4>
                             <p>@Html.DisplayFor(modelItem => item.Created)</p>
 
@@ -99,8 +107,13 @@
 
                             @if (HttpContext.Current.User.IsInRole("Moderator") || (HttpContext.Current.User.IsInRole("Admin")))
                             {
-                                <a href="@Url.Action("Edit", "Comment", new { id= item.Id})">Edit</a>
-                                <a href="@Url.Action("Delete", "Comment", new {id= item.Id})">Delete</a>
+                                <input type="button" class="btn btn-success" value="Edit" onclick="location.href = '@Url.Action("Edit", "Comment", new { id= item.Id})'" />
+                                
+                                @str
+                                
+                                <input type="button" class="btn btn-danger" value="Delete" onclick="location.href = '@Url.Action("Delete", "Comment", new {id= item.Id})'" />
+                                
+                                
                             }
                             
 
@@ -141,10 +154,11 @@
         
         <br />
         
-        <hr />
+        
             
         <p>
-           @Html.ActionLink("Back to List", "Index")
+           <input type="button" class="btn btn-default" value="Back to List" onclick="location.href='@Url.Action("Index")'"/>
+       
         </p>
 
     </div><!--  End Container -->
