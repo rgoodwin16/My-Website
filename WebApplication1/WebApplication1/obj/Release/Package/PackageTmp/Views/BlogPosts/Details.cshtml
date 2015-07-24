@@ -49,35 +49,44 @@
 
                 <hr />
 
+                <p class="well">
+                    Category: @Html.DisplayFor(model => model.Category) | @Html.DisplayFor(model => model.Comments.Count)
+                       
+                    @if (Model.Comments.Count == 1)
+                    {
+                        var str = "Comment";
+                        @str
+                    }
+                    else
+                    {
+                        var str = "Comments";
+                        @str
+                    }
+                    
+                </p>
+                    
+                <hr />
+
                 <!-- Blog Comments -->
                 <!-- Comments Form -->
                 
                 @if (User.Identity.IsAuthenticated)
                 {
 
+                  <form id="contactForm" method="post" action="@Url.Action("CreateComment", "BlogPosts")">
+                    @Html.AntiForgeryToken()
+                    <h3>Leave a Comment</h3>
+                    <input type="hidden" name="PostId" value="@Model.Id" />
                     
-                    
+                    <div class="form-group">
+                        <div>
+                            <textarea name="Body" class="form-control" rows="6"></textarea>
+                        </div>
+                    </div><!-- End Comment Box -->
 
-                        <form id="contactForm" method="post" action="@Url.Action("CreateComment", "BlogPosts")">
-                            @Html.AntiForgeryToken()
-                            <h3>Leave a Comment</h3>
-                            <input type="hidden" name="PostId" value="@Model.Id" />
-                            <div class="form-group">
-                                <div>
+                        <input type="submit" value="Submit" class="btn btn-default" /><br />
 
-                                    <textarea name="Body" class="form-control" rows="6"></textarea>
-                                </div>
-                            </div><!-- End Comment Box -->
-
-                            <input type="submit" value="Submit" class="btn btn-default" /><br />
-
-                        </form>
-                        <!-- End Comment Form -->
-
-                   
-                    
-                   
-
+                   </form><!-- End Comment Form -->
 
                 }
                 else
@@ -86,7 +95,6 @@
                 }
             
                 
-
                 <hr />
 
                 <!-- Posted Comments -->
