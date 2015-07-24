@@ -21,15 +21,7 @@ namespace WebApplication1.Controllers
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
-        // ==============================================
-            //SEARCH
-        // ============================================== 
-
-        public ActionResult Search()
-        {
-            return View();
-        }
-
+        
         // ==============================================
             //INDEX - ADMIN INDEX PAGE
         // ============================================== 
@@ -47,12 +39,23 @@ namespace WebApplication1.Controllers
         // ============================================== 
 
         // GET: BlogPosts
-        public ActionResult Index(int? page)
+        public ActionResult Index(int? page, string search)
         {
+            var blogList = from str in db.Posts
+                           select str;
+            if (search != null)
+            {
+                if (!String.IsNullOrWhiteSpace(search))
+                {
+                    blogList = blogList.Where(s => s.Title.Contains(search) || s.Body.Contains(search) || s.Comments.Any(c=> c.Body.Contains(search)));
+                    
+                }
+            }
+
             int pageSize = 3;
             int pageNumber = (page ?? 1);
 
-            return View(db.Posts.OrderByDescending(p => p.Created).ToPagedList(pageNumber, pageSize));
+            return View(blogList.OrderByDescending(p => p.Created).ToPagedList(pageNumber, pageSize));
         }
 
         
