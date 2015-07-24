@@ -45,6 +45,7 @@ namespace WebApplication1.Models
 
         public DbSet<BlogPost> Posts { get; set; }
         public DbSet<Comment> Comments { get; set; }
+        
     }
 
 }

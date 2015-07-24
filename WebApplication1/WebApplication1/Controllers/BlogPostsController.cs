@@ -47,7 +47,7 @@ namespace WebApplication1.Controllers
             {
                 if (!String.IsNullOrWhiteSpace(search))
                 {
-                    blogList = blogList.Where(s => s.Title.Contains(search) || s.Body.Contains(search) || s.Comments.Any(c=> c.Body.Contains(search)));
+                    blogList = blogList.Where(s => s.Title.Contains(search) || s.Category.Contains(search) || s.Body.Contains(search) || s.Comments.Any(c=> c.Body.Contains(search)));
                     
                 }
             }
@@ -91,7 +91,7 @@ namespace WebApplication1.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Created,Updated,Title,Slug,Body,MediaURL,Published")] BlogPost blogPost, HttpPostedFileBase image)
+        public ActionResult Create([Bind(Include = "Id,Created,Updated,Title,Slug,Body,MediaURL,Published,Category")] BlogPost blogPost, HttpPostedFileBase image)
         {
             //Check if the image selected by the user isn't empty
             if(image!=null && image.ContentLength > 0) 
@@ -139,12 +139,16 @@ namespace WebApplication1.Controllers
                 
                 else
                 {
+                    
+
                     blogPost.Created = DateTimeOffset.Now;
                     
                     blogPost.Slug = slug;
                     
+                    
                     db.Posts.Add(blogPost);
                     db.SaveChanges();
+                    
                     return RedirectToAction("Index");
                     
                 }
