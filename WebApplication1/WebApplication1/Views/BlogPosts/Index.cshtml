@@ -44,25 +44,12 @@
                     <h3><a href="@Url.Action("Details", new { item.Slug })">@Html.DisplayFor(modelItem => item.Title)</a></h3>
 
                     <!-- Author -->
-                    <p>
-                        by Ray Goodwin | Category: @Html.DisplayFor(modelItem=> item.Category) 
-                        
-                    </p>
+                    <p>by Ray Goodwin</p>
 
                     <hr>
 
                     <!-- Date/Time -->
-                    <p><span class="glyphicon glyphicon-time"></span> Posted on @Html.DisplayFor(modelItem => item.Created) | @Html.DisplayFor(modelItem => item.Comments.Count) 
-                
-                    @if ( item.Comments.Count == 1)
-                    {
-                         str = "Comment";
-
-                    }
-                    
-                    @str
-                    
-                    </p>
+                    <p><span class="glyphicon glyphicon-time"></span> Posted on @Html.DisplayFor(modelItem => item.Created)</p>
 
                     <hr>
 
@@ -83,14 +70,23 @@
                    </div>
 
                     <br />
-                    
-                    
-                    <p>
-                      <input type="button" class="btn btn-default" onclick="location.href='@Url.Action("Details", new {item.Slug })'" value="Read More"/>  
-                      
-                         
-                    </p>
+                                        
+                    <p><input type="button" class="btn btn-default" onclick="location.href='@Url.Action("Details", new {item.Slug })'" value="Read More"/></p>
 
+                    <hr />
+                    
+                    <p class="well">
+                        Category: @Html.DisplayFor(modelItem => item.Category) | @Html.DisplayFor(modelItem => item.Comments.Count)
+
+                        @if (item.Comments.Count == 1)
+                        {
+                            str = "Comment";
+
+                        }
+
+                        @str
+                    </p>
+                    
                     <hr />
                 }
            
