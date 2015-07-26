@@ -16,19 +16,7 @@
 <section id="blog" class="big-padding">
 
     <div class="container">
-
-        
-
-        <p>
-            
-            @if (HttpContext.Current.User.IsInRole("Admin"))
-            {
-                @Html.ActionLink("Admin Panel", "Admin")
-            }
-            
-            
-        </p>
-        
+ 
         <div class="row">
 
             <!-- Blog Post Content Column -->
@@ -76,7 +64,7 @@
                     <hr />
                     
                     <p class="well">
-                        Category: @Html.DisplayFor(modelItem => item.Category) | @Html.DisplayFor(modelItem => item.Comments.Count)
+                        Category: <a href="@Url.Action("Index", new {category = (item.Category) })">@Html.DisplayFor(modelItem => item.Category)</a>  | @Html.DisplayFor(modelItem => item.Comments.Count)
 
                         @if (item.Comments.Count == 1)
                         {
@@ -94,34 +82,13 @@
 
             </div><!-- End Blog Post Column -->
 
-            <!-- Blog Sidebar Widgets Column -->
+            <!-- Begin SideBar -->
+            
+            @Html.Partial("SideBar")
 
-            <div class="col-lg-4">
+            <!-- End SideBar -->
 
-                <!-- Blog Search Well -->
-
-                <div class="well">
-                    <form method="post" action="@Url.Action("Index", "BlogPosts")">
-
-                        <input type="search" class="form-control" placeholder="Search"  name="search"/><button type="submit" class="btn btn-default" id="search-button" ><i class=" fa fa-search"></i></button>
-
-
-                    </form>
-                </div><!-- End Blog Search Well -->
-                <!-- Blog Categories Well -->
-
-                <div class="well">
-
-                </div><!-- End Blog Categories Well -->
-
-                <div class="well">
-
-               
-
-                </div><!-- End Meta Well -->
-
-
-            </div><!-- End Sidebar Widget Column -->
+            
 
         </div><!-- End Row -->
 

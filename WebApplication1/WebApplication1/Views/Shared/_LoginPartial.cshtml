@@ -5,19 +5,46 @@
     {
     @Html.AntiForgeryToken()
 
-    <ul class="nav navbar-nav navbar-right">
-        <li>
-            <a href="@Url.Action("Index", "Manage")" class=""><i class="fa fa-user"></i>@User.Identity.Name</a>
+    <div class="well">
+
+        <h4>User Panel</h4>
+        <ul class="navbar-default">
+
+            <li class="navbar-btn btn btn-default">
+                <a href="@Url.Action("Index", "Manage")" class=""><i class="fa fa-user"></i>@User.Identity.Name</a>
+
+            </li>
+            <li class="navbar-btn btn btn-default"><a href="javascript:document.getElementById('logoutForm').submit()"><i class="fa fa-sign-out"></i>Log off</a>
+            </li>
             
-        </li>
-        <li><a href="javascript:document.getElementById('logoutForm').submit()"><i class="fa fa-sign-out"></i>Log off</a></li>
-    </ul>
+                @if (HttpContext.Current.User.IsInRole("Admin"))
+                {
+                    <li class="navbar-btn btn btn-default">
+                    
+                    @Html.ActionLink("Admin Panel", "Admin")
+
+                    </li>
+                }
+            
+        </ul>
+    
+    </div>
+    
+    
     }
 }
 else
 {
-    <ul class="nav navbar-nav navbar-right">
-        <li>@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
-        <li>@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
-    </ul>
+    
+    <div class="well">
+        
+        <h4>User Panel</h4>
+            
+        <ul class=" navbar-default">
+            <li class="navbar-btn btn btn-default">@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
+            <li class="navbar-btn btn btn-default">@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+        </ul>
+    
+    </div>
+    
 }

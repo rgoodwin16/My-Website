@@ -39,23 +39,37 @@ namespace WebApplication1.Controllers
         // ============================================== 
 
         // GET: BlogPosts
-        public ActionResult Index(int? page, string search)
+        [AllowAnonymous]
+        [RequireHttps]
+        public ActionResult Index(int? page, string search, string category)
         {
             var blogList = from str in db.Posts
                            select str;
-            if (search != null)
+           
+            if (search == null)
             {
-                if (!String.IsNullOrWhiteSpace(search))
+                int pageSize = 3;
+                int pageNumber = (page ?? 1);
+                if (category != null)
                 {
-                    blogList = blogList.Where(s => s.Title.Contains(search) || s.Category.Contains(search) || s.Body.Contains(search) || s.Comments.Any(c=> c.Body.Contains(search)));
-                    
-                }
+                    ViewBag.Category = category;
+                    ViewBag.search = null;
+                    var cat = db.Posts.Where(c => c.Category.Equals(category));
+                    return View(cat.OrderByDescending(p => p.Created).ToPagedList(pageNumber, pageSize));
+                }   
+
+                return View(db.Posts.OrderByDescending(p=> p.Created).ToPagedList(pageNumber,pageSize));
+
+            }
+            else
+            {
+                ViewBag.search = search;
+                blogList = db.Posts.Where(s => s.Title.Contains(search) || s.Body.Contains(search) || s.Category.Contains(search) || s.Comments.Any(p => p.Body.Contains(search)));
+
+                return View(blogList.OrderByDescending(p => p.Created).ToPagedList(page ?? 1, 3));
             }
 
-            int pageSize = 3;
-            int pageNumber = (page ?? 1);
-
-            return View(blogList.OrderByDescending(p => p.Created).ToPagedList(pageNumber, pageSize));
+            
         }
 
         

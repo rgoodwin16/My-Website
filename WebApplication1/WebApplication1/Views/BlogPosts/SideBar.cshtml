@@ -1,0 +1,37 @@
+﻿
+<!-- Blog Sidebar Widgets Column -->
+
+<div class="col-lg-4">
+
+    <!-- Blog Search Well -->
+
+    <div class="well">
+        <form method="post" action="@Url.Action("Index", "BlogPosts")" class="row">
+
+            <input type="search" class="form-control col-sm-8" placeholder="Search" name="search" /><button type="submit" class="btn btn-default col-sm-2" id="search-button"><i class=" fa fa-search"></i></button>
+
+
+        </form>
+    </div><!-- End Blog Search Well -->
+   
+     <!-- Blog Categories Well -->
+
+    <div class="well">
+        <h4>Post Categories</h4>
+        <ul>
+            <li class ="navbar-btn btn btn-default" onclick="location.href = '@Url.Action("Index", new { category="Personal" })'">Personal</li>
+            <li class="navbar-btn btn btn-default" onclick="location.href='@Url.Action("Index", new { category="Professional" })'">Professional</li>
+            <li class="navbar-btn btn btn-default" onclick="location.href='@Url.Action("Index", new {category="Testing" })'">Testing</li>
+        </ul>
+    </div><!-- End Blog Categories Well -->
+
+    
+    <div><!-- Begin Meta Login-->
+        
+        @Html.Partial("_LoginPartial")
+       
+
+    </div><!-- End Meta Well -->
+
+
+</div><!-- End Sidebar Widget Column -->
