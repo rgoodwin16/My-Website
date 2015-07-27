@@ -16,11 +16,11 @@
 
             <!-- Blog Post Content Column -->
         <div id="start"></div>
-            <div class="col-lg-8">
+            <div class="col-lg-12">
 
                 <!-- Blog Post -->
                 <!-- Title -->
-                <h2>@Html.DisplayFor(model => model.Title)</h2>
+                <h1>@Html.DisplayFor(model => model.Title)</h1>
             
                 <!-- Author -->
                 <p>
@@ -138,11 +138,7 @@
 
                 </div><!-- End Post Content Column -->
 
-            <!-- Begin SideBar -->
-            
-            @Html.Partial("SideBar")
-
-            <!-- End SideBar -->
+           
 
 
 
@@ -150,7 +146,41 @@
         
         <br />
         
-        
+        <!-- Begin Footer/SideBar Content -->
+
+        <div class="row">
+                        
+            <div class="col-lg-6">
+
+                <div class="well">
+                    <form method="post" action="@Url.Action("Index", "BlogPosts")" class="row">
+
+                        <input type="search" class="form-control col-sm-10" placeholder="Search" name="search" /><button type="submit" class="btn btn-default col-sm-2" id="search-button"><i class=" fa fa-search"></i></button>
+
+
+                    </form>
+                </div><!-- End Blog Search Well -->
+
+                <div class="well">
+                    <h4>Post Categories</h4>
+                    <ul>
+                        <li class="navbar-btn btn btn-default" onclick="location.href = '@Url.Action("Index", new { category="Personal" })'">Personal</li>
+                        <li class="navbar-btn btn btn-default" onclick="location.href='@Url.Action("Index", new { category="Professional" })'">Professional</li>
+                        <li class="navbar-btn btn btn-default" onclick="location.href='@Url.Action("Index", new {category="Testing" })'">Testing</li>
+                    </ul>
+                </div><!-- End Blog Categories Well -->
+
+            </div><!-- End Post Categories -->
+
+            <div class="col-lg-6">
+
+                @Html.Partial("_LoginPartial")
+
+            </div><!-- End User Panel -->
+
+        </div><!-- End Row -->
+
+        <!-- End Footer/Sidebar Content -->
             
         <p>
            <input type="button" class="btn btn-default" value="Back to List" onclick="location.href='@Url.Action("Index")'"/>
