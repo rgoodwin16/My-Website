@@ -1199,7 +1199,8 @@ hr{
 
 #contact{
 	position: relative;
-	background: url(../images/map.jpg) center center no-repeat;
+	background: url(../images/map_25.png) center center no-repeat;
+    
 }
 
 .color-overlay:before{

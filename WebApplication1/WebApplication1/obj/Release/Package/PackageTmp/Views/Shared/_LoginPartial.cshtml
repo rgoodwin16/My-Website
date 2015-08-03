@@ -8,7 +8,7 @@
     <div class="well">
 
         <h4>User Panel</h4>
-        <ul class="navbar-default">
+        <ul>
             
             <li class="navbar-btn btn btn-default">
                 <a href="@Url.Action("Index", "Manage")" class=""><i class="fa fa-user"></i>@User.Identity.Name</a>
@@ -40,7 +40,7 @@ else
         
         <h4>User Panel</h4>
             
-        <ul class=" navbar-default">
+        <ul>
             <li class="navbar-btn btn btn-default">@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
             <li class="navbar-btn btn btn-default">@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
         </ul>

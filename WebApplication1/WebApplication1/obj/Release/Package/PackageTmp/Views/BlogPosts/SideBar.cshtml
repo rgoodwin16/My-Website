@@ -6,12 +6,18 @@
     <!-- Blog Search Well -->
 
     <div class="well">
-        <form method="post" action="@Url.Action("Index", "BlogPosts")" class="row">
 
-            <input type="search" class="form-control col-sm-10" placeholder="Search" name="search" /><button type="submit" class="btn btn-default col-sm-2" id="search-button"><i class=" fa fa-search"></i></button>
+    
 
+        <form method="post" action="@Url.Action("Index", "BlogPosts")" class="input-group">
+
+            <input type="search" class="form-control" placeholder="Search" name="search" />
+            <span class="input-group-btn"><button type="submit" class="btn btn-default" id="search-button"><i class=" fa fa-search"></i></button></span>
 
         </form>
+
+    
+
     </div><!-- End Blog Search Well -->
    
     <br />
