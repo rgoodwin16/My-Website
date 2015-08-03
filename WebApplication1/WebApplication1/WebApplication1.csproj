@@ -237,6 +237,8 @@
     <Content Include="images\header-image.png" />
     <Content Include="images\logo.png" />
     <Content Include="images\map.jpg" />
+    <Content Include="images\map_25.png" />
+    <Content Include="images\map_50.png" />
     <Content Include="images\nanye.png" />
     <Content Include="images\nanye_3.png" />
     <Content Include="images\polygon.png" />
