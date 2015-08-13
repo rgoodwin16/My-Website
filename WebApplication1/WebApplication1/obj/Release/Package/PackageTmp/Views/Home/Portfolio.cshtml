@@ -12,10 +12,10 @@
 
         <div class="text-center scrollimation fade-up">
             <div id="filter-works" class="btn-group">
-                <button data-filter="*" type="button" class="btn btn-default active">All Items<span class="project-count"></span></button>
-                <button data-filter=".web" type="button" class="btn btn-default">Javascript<span class="project-count"></span></button>
-                <button data-filter=".print" type="button" class="btn btn-default">Bug Tracker<span class="project-count"></span></button>
-                <button data-filter=".video" type="button" class="btn btn-default">Budget Tool<span class="project-count"></span></button>
+                @*<button data-filter="*" type="button" class="btn btn-default active">All Items<span class="project-count"></span></button>*@
+                <button data-filter=".web" type="button" class="btn btn-default">Javascript</button>
+                <button data-filter=".print" type="button" class="btn btn-default">Bug Tracker</button>
+                <button data-filter=".video" type="button" class="btn btn-default">Budget Tool</button>
             </div>
         </div>
 
@@ -150,7 +150,18 @@
 
             </a>
 
-                  
+            <!-- ==============================================
+            BUG TRACKER
+            =============================================== -->
+
+           <a class="project-item col-sm-12  col-md-12 col-lg-12 print" href="#?@Url.Action("BugTracker", "Projects")">
+
+               <img class="img-responsive project-image img-center" src="~/images/bt_logo.png" alt=""/>
+               <div class="hover-title">
+                   <h2 class="project-title">BugTracker</h2><!-- WordFreq -->
+                   <p>Web Application</p><!--Project Subtitle -->
+               </div>
+           </a>       
 
         </div>
 
