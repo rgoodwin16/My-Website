@@ -55,9 +55,10 @@ namespace WebApplication1.Controllers
                     ViewBag.Category = category;
                     ViewBag.search = null;
                     var cat = db.Posts.Where(c => c.Category.Equals(category));
+                    //ViewBag.Recent = db.Posts.OrderByDescending(c => c.Created).Take(3).ToList();
                     return View(cat.OrderByDescending(p => p.Created).ToPagedList(pageNumber, pageSize));
-                }   
-
+                }
+                //ViewBag.Recent = db.Posts.OrderByDescending(c => c.Created).Take(3).ToList();
                 return View(db.Posts.OrderByDescending(p=> p.Created).ToPagedList(pageNumber,pageSize));
 
             }
@@ -65,6 +66,8 @@ namespace WebApplication1.Controllers
             {
                 ViewBag.search = search;
                 blogList = db.Posts.Where(s => s.Title.Contains(search) || s.Body.Contains(search) || s.Category.Contains(search) || s.Comments.Any(p => p.Body.Contains(search)));
+                //ViewBag.Recent = db.Posts.OrderByDescending(c => c.Created).Take(3).ToList();
+
 
                 return View(blogList.OrderByDescending(p => p.Created).ToPagedList(page ?? 1, 3));
             }
@@ -90,6 +93,7 @@ namespace WebApplication1.Controllers
             {
                 return HttpNotFound();
             }
+            //ViewBag.Recent = db.Posts.OrderByDescending(c => c.Created).Take(5).ToList();
             return View(blogPost);
         }
 
