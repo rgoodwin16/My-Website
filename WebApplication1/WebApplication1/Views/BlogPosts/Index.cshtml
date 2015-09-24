@@ -1,9 +1,11 @@
 ﻿@using PagedList.Mvc;
 @using PagedList;
+
 @model IPagedList<Blog.Models.BlogPost>
 
 @{
     ViewBag.Title = "Index";
+    
 }
 
 
@@ -23,70 +25,68 @@
 
             <div class="col-md-8">
 
-                <!-- Blog Post -->
-                
                 @foreach (var item in Model)
                 {
                     var str = "Comments";
-                    <!-- Title -->
-                    <h3><a href="@Url.Action("Details", new { item.Slug })">@Html.DisplayFor(modelItem => item.Title)</a></h3>
-
-                    <!-- Author -->
-                    <p>by Ray Goodwin</p>
-
-                    <hr>
-
-                    <!-- Date/Time -->
-                    <p><span class="glyphicon glyphicon-time"></span> Posted on @Html.DisplayFor(modelItem => item.Created)</p>
-
-                    <hr>
-
-                    <!-- Post Image -->
                     
-                    <div>
+                    <div class="blog-post">
+                        
+                        <div class="post-title">
+                            <h3><a href="@Url.Action("Details", new { item.Slug })">@Html.DisplayFor(modelItem => item.Title)</a></h3>
+                        </div><!-- /post title -->
+
+                        <div class="post-meta">
+                            <span>
+                                <i class="fa fa-calendar-o"></i>
+                                @Html.DisplayFor(modelItem => item.Created)
+                            </span>
+                            <span>
+                                <i class="fa fa-user"></i>
+                                by Ray Goodwin
+                            </span>
+                            <span>
+                                <i class="fa fa-folder-o">
+                                    in <a href="@Url.Action("Index", new {category = (item.Category) })">@Html.DisplayFor(modelItem => item.Category)</a>
+                                </i>
+                            </span>
+                            <span>
+                                <i class="fa fa-comment-o"></i>
+                                @Html.DisplayFor(modelItem => item.Comments.Count)
+                                @if (item.Comments.Count == 1)
+                                {
+                                    str = "Comment";
+
+                                }
+
+                                @str
+                            </span>
+                        </div><!-- /post meta -->
+                        <hr />
+
                         @if (item.MediaURL != null)
                         {
                             <img class="img-responsive" src="@item.MediaURL" alt="" />
                         }
-                    </div>
-                    
-                    <!-- Post Content -->
-                    <div class="ellipsis">
 
-                        <p>@Html.Raw(item.Body)</p>
+                        <div class="post-body ellipsis">
+                            @Html.Raw(item.Body)
+                            <div class="clearfix"></div>
+                        </div><!-- /post-body -->
+                        <br />
+                        <p><input type="button" class="btn btn-default" onclick="location.href='@Url.Action("Details", new {item.Slug })'" value="Read More" /></p>
 
-                   </div>
-
-                    <br />
-                                        
-                    <p><input type="button" class="btn btn-default" onclick="location.href='@Url.Action("Details", new {item.Slug })'" value="Read More"/></p>
-
-                    <hr />
-                    
-                    <p class="well">
-                        Category: <a href="@Url.Action("Index", new {category = (item.Category) })">@Html.DisplayFor(modelItem => item.Category)</a>  | @Html.DisplayFor(modelItem => item.Comments.Count)
-
-                        @if (item.Comments.Count == 1)
-                        {
-                            str = "Comment";
-
-                        }
-
-                        @str
-                    </p>
+                    </div><!-- /blog-post -->
                     
                     <hr />
                 }
-           
-
 
             </div><!-- End Blog Post Column -->
 
             <!-- Begin SideBar -->
             
-            <div class="col-lg-4">
+            <div class="col-md-4">
 
-            @Html.Partial("SideBar")
+                @Html.Partial("SideBar")
 
             </div>
 

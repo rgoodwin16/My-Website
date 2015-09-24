@@ -18,5 +18,10 @@ namespace WebApplication1.Controllers
         {
             return PartialView();
         }
+
+        public ActionResult BudgetPlanner()
+        {
+            return PartialView();
+        }
     }
 }

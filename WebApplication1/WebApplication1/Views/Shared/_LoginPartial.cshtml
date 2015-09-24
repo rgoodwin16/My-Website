@@ -1,50 +1,35 @@
 ﻿@using Microsoft.AspNet.Identity
 @if (Request.IsAuthenticated)
 {
-    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm"}))
     {
-    @Html.AntiForgeryToken()
+        @Html.AntiForgeryToken()
 
-    <div class="well">
-
-        <h4>User Panel</h4>
         <ul>
-            
-            <li class="navbar-btn btn btn-default">
-                <a href="@Url.Action("Index", "Manage")" class=""><i class="fa fa-user"></i>@User.Identity.Name</a>
-
+            <li>
+                <a href="@Url.Action("Index", "Manage")" class="btn btn-rg btn-small btn-main-color"><i class="fa fa-user"></i>@User.Identity.Name</a>
             </li>
-            <li class="navbar-btn btn btn-default"><a href="javascript:document.getElementById('logoutForm').submit()"><i class="fa fa-sign-out"></i>Log off</a>
+            <li>
+                <a href="javascript:document.getElementById('logoutForm').submit()" class="btn btn-rg btn-small btn-main-color"><i class="fa fa-sign-out"></i>Log off</a>
             </li>
-            
-                @if (HttpContext.Current.User.IsInRole("Admin"))
-                {
-                    <li class="navbar-btn btn btn-default">
-                    
-                    @Html.ActionLink("Admin Panel", "Admin")
-
-                    </li>
-                }
-            
+            @if (HttpContext.Current.User.IsInRole("Admin"))
+            {
+                <li>
+                    <a href="@Url.Action("Admin","BlogPosts")" class="btn btn-rg btn-small btn-main-color">Admin Panel</a>
+                </li>
+            }
         </ul>
-    
-    </div>
-    
-    
     }
 }
 else
 {
-    
-    <div class="well">
-        
-        <h4>User Panel</h4>
-            
-        <ul>
-            <li class="navbar-btn btn btn-default">@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
-            <li class="navbar-btn btn btn-default">@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
-        </ul>
-    
-    </div>
-    
+    <ul>
+        <li>
+            <a href="@Url.Action("Register", "Account")" class="btn btn-rg btn-small btn-main-color">Register</a>
+        </li>
+        <li>
+            <a href="@Url.Action("Login", "Account")" class="btn btn-rg btn-small btn-main-color">Login</a>
+        </li>
+    </ul>
+
 }

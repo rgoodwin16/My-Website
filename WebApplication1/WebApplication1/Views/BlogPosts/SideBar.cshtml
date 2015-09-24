@@ -1,47 +1,35 @@
 ﻿
 <!-- Blog Sidebar Widgets Column -->
 
-
-
-    <!-- Blog Search Well -->
-
-    <div class="well">
-
+<div class="widget widget_search">
     
-
-        <form method="post" action="@Url.Action("Index", "BlogPosts")" class="input-group">
-
-            <input type="search" class="form-control" placeholder="Search" name="search" />
-            <span class="input-group-btn"><button type="submit" class="btn btn-default" id="search-button"><i class=" fa fa-search"></i></button></span>
-
-        </form>
-
-    
-
-    </div><!-- End Blog Search Well -->
-   
-    <br />
-
-     <!-- Blog Categories Well -->
-
-    <div class="well">
-        <h4>Post Categories</h4>
-        <ul>
-            <li class ="navbar-btn btn btn-default" onclick="location.href = '@Url.Action("Index", new { category="Personal" })'">Personal</li>
-            <li class="navbar-btn btn btn-default" onclick="location.href='@Url.Action("Index", new { category="Professional" })'">Professional</li>
-            <li class="navbar-btn btn btn-default" onclick="location.href='@Url.Action("Index", new {category="Testing" })'">Testing</li>
-        </ul>
-    </div><!-- End Blog Categories Well -->
-
-
-
-    
-    <div><!-- Begin Meta Login-->
+    <form method="post" action="@Url.Action("Index", "BlogPosts")">
+        <div>
+            <input type="search" name="search" />
+            <input type="submit" id="search-button">
+        </div>
         
+    </form>
+</div>
+
+<div class="widget widget_categories">
+    <h6 class="widget-title">Categories</h6>
+    <ul>
+        <li>
+            <a href="@Url.Action("Index", new { category="Personal" })" class="btn btn-rg btn-small btn-main-color">Personal</a>
+        </li>
+        <li>
+            <a href="@Url.Action("Index", new { category = "Professional" })" class="btn btn-rg btn-small btn-main-color">Professional</a>
+        </li>
+        <li>
+            <a href="@Url.Action("Index", new { category = "Testing" })" class="btn btn-rg btn-small btn-main-color">Testing</a>
+        </li>
+    </ul>
+</div>
+
+<div class="widget widget_categories">
+    <h6 class="widget-title">User</h6>
         @Html.Partial("_LoginPartial")
-       
-
-    </div><!-- End Meta Well -->
-
+</div>
 
 <!-- End Sidebar Widget Column -->

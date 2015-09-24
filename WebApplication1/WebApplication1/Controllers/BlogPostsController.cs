@@ -233,7 +233,7 @@ namespace WebApplication1.Controllers
             BlogPost blogPost = db.Posts.Find(id);
             db.Posts.Remove(blogPost);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("Admin");
         }
 
         protected override void Dispose(bool disposing)

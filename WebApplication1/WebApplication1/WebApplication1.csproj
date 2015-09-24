@@ -232,6 +232,7 @@
     <Content Include="Content\Site.css" />
     <Content Include="Global.asax" />
     <Content Include="images\about.jpg" />
+    <Content Include="images\bp_logo.png" />
     <Content Include="images\bt_logo.png" />
     <Content Include="images\cf_logo.png" />
     <Content Include="images\featured-iwoa.png" />
@@ -248,6 +249,7 @@
     <Content Include="images\preloader.gif" />
     <Content Include="images\profile-pic.png" />
     <Content Include="images\project-viewer-bg.png" />
+    <Content Include="images\projects\budgetplanner_splash.png" />
     <Content Include="images\projects\bugtracker_splash.png" />
     <Content Include="images\projects\calc.png" />
     <Content Include="images\projects\cf_splash.png" />
@@ -268,6 +270,7 @@
     <Content Include="images\ray_goodwin.png" />
     <Content Include="images\ray_goodwin_grey.png" />
     <Compile Include="Models\StringUtilities.cs" />
+    <Content Include="images\search.png" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="fonts\fontawesome-webfont.eot" />
@@ -569,6 +572,7 @@
     <Content Include="Views\BlogPosts\SideBar.cshtml" />
     <Content Include="Views\Projects\BugTracker.cshtml" />
     <Content Include="Views\Projects\CarFinder.cshtml" />
+    <Content Include="Views\Projects\BudgetPlanner.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

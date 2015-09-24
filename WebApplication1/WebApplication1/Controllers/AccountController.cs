@@ -80,6 +80,8 @@ namespace WebApplication1.Controllers
             switch (result)
             {
                 case SignInStatus.Success:
+                    if (string.IsNullOrWhiteSpace(returnUrl))
+                        return RedirectToAction("Index","BlogPosts");
                     return RedirectToLocal(returnUrl);
                 case SignInStatus.LockedOut:
                     return View("Lockout");
@@ -164,7 +166,7 @@ namespace WebApplication1.Controllers
                      var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                      await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
 
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Index", "BlogPosts");
                 }
                 AddErrors(result);
             }
@@ -393,7 +395,7 @@ namespace WebApplication1.Controllers
         public ActionResult LogOff()
         {
             AuthenticationManager.SignOut();
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Index", "BlogPosts");
         }
 
         //

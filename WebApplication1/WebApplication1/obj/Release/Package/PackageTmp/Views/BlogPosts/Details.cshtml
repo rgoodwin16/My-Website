@@ -15,56 +15,54 @@
         <div class="row">
 
             <!-- Blog Post Content Column -->
-        <div id="start"></div>
-            <div class="col-lg-8">
+        
+            <div class="col-md-8">
+                @{
+                    var str = "Comments";
+                }
 
-                <!-- Blog Post -->
-                <!-- Title -->
-                <h1>@Html.DisplayFor(model => model.Title)</h1>
-            
-                <!-- Author -->
-                <p>
-                    by Ray Goodwin
-                </p>
-
-                <hr>
-
-                <!-- Date/Time -->
-                <p><span class="glyphicon glyphicon-time"></span> Posted on @Html.DisplayFor(model => model.Created)</p>
-
-                <hr>
-
-                <!-- Post Image -->
-
-                <div>
-                    @if (@Model.MediaURL != null)
-                    {
-                        <img class="img-responsive" src="@Model.MediaURL" alt="" />
-                    }
+                <div class="blog-post">
+                    <div class="post-title">
+                        <h3>@Html.DisplayFor(model => model.Title)</h3>
+                    </div><!-- /post title -->
                 </div>
-            
-                <!-- Post Content -->
 
-                <p>@Html.Raw(Model.Body)</p>
-
+                <div class="post-meta">
+                    <span>
+                        <i class="fa fa-calendar-o"></i>
+                        @Html.DisplayFor(model => model.Created)
+                    </span>
+                    <span>
+                        <i class="fa fa-user"></i>
+                        by Ray Goodwin
+                    </span>
+                    <span>
+                        <i class="fa fa-folder-o">
+                            in <a href="@Url.Action("Index", new {category = (Model.Category) })">@Html.DisplayFor(model => model.Category)</a>
+                        </i>
+                    </span>
+                    <span>
+                        <i class="fa fa-comment-o"></i>
+                        @Html.DisplayFor(model => model.Comments.Count)
+                        @if (Model.Comments.Count == 1)
+                        {
+                            str = "Comment";
+                        }
+                        @str
+                    </span>
+                </div><!-- /post meta -->
                 <hr />
+            
+                @if (Model.MediaURL != null)
+                {
+                    <img class="img-responsive" src="@Model.MediaURL" alt="" />
+                }   
 
-                <p class="well">
-                    Category: @Html.DisplayFor(model => model.Category) | @Html.DisplayFor(model => model.Comments.Count)
-                       
-                    @if (Model.Comments.Count == 1)
-                    {
-                        var str = "Comment";
-                        @str
-                    }
-                    else
-                    {
-                        var str = "Comments";
-                        @str
-                    }
-                    
-                </p>
-                    
+                <div class="post-body">
+                    @Html.Raw(Model.Body)
+                    <div class="clearfix"></div>
+                </div><!-- /post-body -->
+
                 <hr />
 
                 <!-- Blog Comments -->
@@ -102,22 +100,23 @@
 
                     @foreach (var item in Model.Comments.OrderByDescending(c => c.Created))
                     {
-                        var str = "|";
+                        var str2 = "|";
                         <div>
                             <h4>@Html.DisplayFor(modelItem => item.Author.UserName)</h4>
                             <p>@Html.DisplayFor(modelItem => item.Created)</p>
 
-                            <div class="well">
+                            
                                 <p>@Html.Raw( item.Body)</p>
-                            </div><!-- End Comment Body -->
+                            <!-- End Comment Body -->
 
+                            <hr />
                             <br />
 
                             @if (HttpContext.Current.User.IsInRole("Moderator") || (HttpContext.Current.User.IsInRole("Admin")))
                             {
                                 <input type="button" class="btn btn-success" value="Edit" onclick="location.href = '@Url.Action("Edit", "Comment", new { id= item.Id})'" />
                                 
-                                @str
+                                @str2
                                 
                                 <input type="button" class="btn btn-danger" value="Delete" onclick="location.href = '@Url.Action("Delete", "Comment", new {id= item.Id})'" />
                                 
@@ -141,7 +140,7 @@
            
             <!-- Begin SideBar -->
         
-            <div class="col-lg-4">
+            <div class="col-md-4">
 
                 @Html.Partial("SideBar")
 
