@@ -6,7 +6,7 @@ using System.Text;
 
 namespace WebApplication1.Models
 {
-    public class ContactMessage
+    public class ContactMessage : WebApplication1.Controllers.ContactController.RegexUtilities
     {
         [Required]
         public string contactName { get; set; }
@@ -17,5 +17,7 @@ namespace WebApplication1.Models
         [Required]
         [EmailAddress]
         public string FromEmail { get; set; }
+
+        
     }
 }

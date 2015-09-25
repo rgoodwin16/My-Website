@@ -41,6 +41,7 @@
             <form id="contactForm" class="col-sm-6 col-md-offset-1 scrollimation fade-left" action="@Url.Action("Index", "Contact")" method="post" novalidate>
                 @Html.AntiForgeryToken()
                 <div><h3>@ViewBag.MessageSent</h3></div>
+                <div><h3>@ViewBag.EmailError</h3></div>
                 <div class="form-group">
                     <div>
                         
